@@ -19,7 +19,7 @@ public class Restaurant {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    @Column(name="restaurant_name")
-    private String restaurantName;
+    @Column(name="restaurant_name") // database teki isim
+    private String restaurantName; // input json daki isim
 
 }
