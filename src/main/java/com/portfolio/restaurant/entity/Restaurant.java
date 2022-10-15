@@ -1,5 +1,4 @@
-package com.foorcun.restaurant.entity;
-
+package com.portfolio.restaurant.entity;
 
 import lombok.*;
 import org.hibernate.annotations.Comment;

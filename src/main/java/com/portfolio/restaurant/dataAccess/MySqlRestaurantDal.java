@@ -1,7 +1,7 @@
-package com.foorcun.restaurant.dataAccess;
+package com.portfolio.restaurant.dataAccess;
 
 
-import com.foorcun.restaurant.entity.Restaurant;
+import com.portfolio.restaurant.entity.Restaurant;
 import org.hibernate.Session;
 import org.springframework.stereotype.Repository;
 
@@ -21,7 +21,7 @@ public class MySqlRestaurantDal implements IRestaurantDal{
 
     @Override
     @Transactional
-    public List<Restaurant> getAll() {
+    public List<Restaurant> getAllRestaurant() {
         Session session = entityManager.unwrap(Session.class);
         List<Restaurant> restaurants = session.createQuery("from Restaurant", Restaurant.class).getResultList();
         return restaurants;
@@ -30,37 +30,46 @@ public class MySqlRestaurantDal implements IRestaurantDal{
 
     @Override
     @Transactional
-    public void add(Restaurant restaurant) {
+    public String createRestaurant(Restaurant restaurant) {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(restaurant);
+        //return collectionsApiFuture.get().getUpdateTime().toString() +"\n"+"Successfully created "+ restaurant.getDocumentId();
+        return "Successfully created ";
+
 
     }
 
     @Override
     @Transactional
 
-    public void update(Restaurant restaurant) {
+    public String updateRestaurant(Restaurant restaurant) {
         Session session = entityManager.unwrap(Session.class);
         session.saveOrUpdate(restaurant);
+        //return collectionsApiFuture.get().getUpdateTime().toString() +"\n"+"Successfully updated " + restaurant.getDocumentId();
+        return "Successfully updated";
+
 
     }
 
     @Override
     @Transactional
 
-    public void delete(Restaurant restaurant) {
+    public String deleteRestaurant(String id) {
         Session session = entityManager.unwrap(Session.class);
-        Restaurant restaurantToDelete = session.get(Restaurant.class, restaurant.getId());
+        Restaurant restaurantToDelete = session.get(Restaurant.class, Integer.parseInt(id));
         session.delete(restaurantToDelete);
 
+        return "Successfully deleted " + id;
+
+
     }
 
     @Override
     @Transactional
 
-    public Restaurant getById(int id) {
+    public Restaurant getById(String id) {
         Session session = entityManager.unwrap(Session.class);
-        Restaurant restaurant = session.get(Restaurant.class, id);
+        Restaurant restaurant = session.get(Restaurant.class, Integer.parseInt(id));
         return restaurant;
 
     }
